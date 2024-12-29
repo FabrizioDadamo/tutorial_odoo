@@ -1,18 +1,21 @@
 <odoo>
     <data noupdate="0">
-        <!-- Menu principale -->
-        <menuitem id="menu_tutorial_root" name="Apprendimento Odoo" sequence="10"/>
-
-        <!-- Menu per Tutorial -->
-        <menuitem id="menu_tutorial_main" name="Tutorial" parent="menu_tutorial_root" action="action_tutorial"/>
 
         <!-- Azione Tutorial -->
         <record id="action_tutorial" model="ir.actions.act_window">
             <field name="name">Tutorial</field>
             <field name="res_model">tutorial.model</field>
             <field name="view_mode">tree,form</field>
-
         </record>
+
+        <!-- Menu principale -->
+        <menuitem id="menu_tutorial_root" name="Apprendimento Odoo" sequence="10"/>
+
+        <!-- Menu per Tutorial -->
+        <menuitem id="menu_tutorial_main"
+                  name="Tutorial"
+                  parent="menu_tutorial_root"
+                  action="action_tutorial"/>
 
         <!-- Vista Tree -->
         <record id="view_tutorial_tree" model="ir.ui.view">
@@ -48,5 +51,6 @@
                 </form>
             </field>
         </record>
+
     </data>
 </odoo>
