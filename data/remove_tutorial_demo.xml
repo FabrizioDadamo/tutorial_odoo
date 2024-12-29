@@ -1,0 +1,6 @@
+<odoo>
+    <data noupdate="1">
+        <record id="tutorial_demo_1" model="tutorial.model" delete="1"/>
+        <record id="tutorial_demo_2" model="tutorial.model" delete="1"/>
+    </data>
+</odoo>

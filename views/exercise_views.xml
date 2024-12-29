@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record id="view_exercise_tree" model="ir.ui.view">
+            <field name="name">exercise.tree</field>
+            <field name="model">exercise.model</field>
+            <field name="arch" type="xml">
+                <tree string="Esercizi">
+                    <field name="name"/>
+                    <field name="tutorial_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_exercise_form" model="ir.ui.view">
+            <field name="name">exercise.form</field>
+            <field name="model">exercise.model</field>
+            <field name="arch" type="xml">
+                <form string="Esercizio">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="tutorial_id"/>
+                            <field name="hint"/>
+                            <field name="answer"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

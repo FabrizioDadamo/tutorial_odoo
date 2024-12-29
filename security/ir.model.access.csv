@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tutorial_user,access_tutorial_user,model_tutorial_model,,1,0,0,0
+access_tutorial_manager,access_tutorial_manager,model_tutorial_model,base.group_system,1,1,1,1
+access_exercise_user,access_exercise_user,model_exercise_model,,1,0,0,0
+access_exercise_manager,access_exercise_manager,model_exercise_model,base.group_system,1,1,1,1
+access_progress_user,access_progress_user,model_progress_model,,1,0,0,0
+access_progress_manager,access_progress_manager,model_progress_model,base.group_system,1,1,1,1

@@ -1,0 +1,25 @@
+<odoo>
+    <data>
+        <!-- Azioni -->
+        <record id="action_tutorial" model="ir.actions.act_window">
+            <field name="name">Tutorial</field>
+            <field name="res_model">tutorial.model</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <record id="action_exercise" model="ir.actions.act_window">
+            <field name="name">Esercizi</field>
+            <field name="res_model">exercise.model</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- Menu Principale -->
+        <menuitem id="menu_tutorial_root" name="Apprendimento Odoo" sequence="10"/>
+
+        <!-- Sotto-menu -->
+        <menuitem id="menu_tutorial_main" name="Tutorial" parent="menu_tutorial_root" action="action_tutorial" sequence="20"/>
+        <menuitem id="menu_exercise_main" name="Esercizi" parent="menu_tutorial_root" action="action_exercise" sequence="30"/>
+    </data>
+</odoo>

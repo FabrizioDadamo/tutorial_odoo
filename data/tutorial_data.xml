@@ -1,0 +1,379 @@
+<odoo>
+    <data noupdate="0">
+
+        <record id="tutorial_intro_structure" model="tutorial.model">
+            <field name="name">Introduzione alla struttura di un modulo</field>
+            <field name="content">
+                    <![CDATA[
+                <h1>Struttura di un Modulo in Odoo</h1>
+                <p>Un modulo in Odoo è composto da una serie di file e cartelle che lavorano insieme per aggiungere funzionalità specifiche alla piattaforma. I componenti principali sono:</p>
+                <ul>
+                    <li><b>Manifest (<code>__manifest__.py</code>):</b> Il file che descrive il modulo, le sue dipendenze e i file collegati.</li>
+                    <li><b>Init (<code>__init__.py</code>):</b> Il file che specifica quali componenti Python caricare.</li>
+                    <li><b>Modelli:</b> Le tabelle del database e la logica di business.</li>
+                    <li><b>Viste:</b> Come i dati sono presentati agli utenti nell'interfaccia.</li>
+                    <li><b>Sicurezza:</b> Controlla chi può accedere ai dati e alle funzionalità.</li>
+                    <li><b>Dati:</b> Caricamento di dati iniziali o predefiniti.</li>
+                </ul>
+                <h2>Creazione di un modulo base</h2>
+                <p>Per iniziare, crea una directory con il nome del modulo (ad esempio <code>gestione_articoli</code>) nella cartella degli addons di Odoo.</p>
+                <ol>
+                    <li>Crea il file <code>__manifest__.py</code>.</li>
+                    <li>Crea il file <code>__init__.py</code>.</li>
+                    <li>Aggiungi le cartelle <code>models</code>, <code>views</code>, e <code>security</code>.</li>
+                </ol>
+                ]]>
+            </field>
+            <field name="description">Comprendere la struttura di un modulo e i suoi componenti.</field>
+            <field name="is_completed">False</field>
+            <field name="sequence">1</field>
+        </record>
+
+
+        <record id="tutorial_manifest" model="tutorial.model">
+            <field name="name">Il file Manifest</field>
+            <field name="content">
+                <![CDATA[
+                    <h1>Il file <code>__manifest__.py</code></h1>
+                    <p>Il file manifest è il punto di partenza di ogni modulo in Odoo. Contiene informazioni fondamentali sul modulo e istruzioni su come caricarlo.</p>
+                    <h2>Struttura del file</h2>
+                    <p>Un file manifest è un dizionario Python. Ogni chiave rappresenta un'informazione o un'istruzione. Ecco un esempio di base:</p>
+                    <pre>
+            {
+                'name': "Gestione Articoli",
+                'version': "1.0",
+                'summary': "Modulo per gestire articoli",
+                'sequence': 10,
+                'description': "Permette di creare e gestire articoli.",
+                'category': 'Tools',
+                'author': "Il Tuo Nome",
+                'website': "https://example.com",
+                'depends': ['base'],
+                'data': [
+                    'security/ir.model.access.csv',
+                    'views/article_views.xml',
+                ],
+                'installable': True,
+                'application': True,
+                'auto_install': False,
+            }
+                    </pre>
+                    <h2>Chiavi principali</h2>
+                    <ul>
+                        <li><b>name:</b> Nome del modulo visualizzato.</li>
+                        <li><b>version:</b> Versione del modulo, utile per gli aggiornamenti.</li>
+                        <li><b>depends:</b> Elenco dei moduli da cui dipende (ad esempio <code>base</code>).</li>
+                        <li><b>data:</b> Elenco di file XML e CSV caricati durante l'installazione.</li>
+                    </ul>
+                    <h2>Attività</h2>
+                    <p>Definisci un file <code>__manifest__.py</code> per il tuo modulo <code>gestione_articoli</code> e includi almeno una dipendenza e un file XML nella chiave <code>data</code>.</p>
+                    ]]>
+            </field>
+            <field name="description">Approfondire il ruolo e la struttura del file Manifest.</field>
+            <field name="is_completed">False</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="tutorial_init" model="tutorial.model">
+            <field name="name">Il file Init</field>
+            <field name="content">
+                            <![CDATA[
+                    <h1>Il file <code>__init__.py</code></h1>
+                    <p>Il file <code>__init__.py</code> è usato per indicare a Odoo quali file Python devono essere caricati per il modulo.</p>
+                    <h2>Esempio di file Init</h2>
+                    <p>Se il modulo ha una directory <code>models</code> con un file <code>article.py</code>, il file <code>__init__.py</code> deve essere così:</p>
+                    <pre>
+            from . import models
+                    </pre>
+                    <h2>Importare specifici file</h2>
+                    <p>Puoi anche importare file specifici:</p>
+                    <pre>
+            from .models import article
+                    </pre>
+                    <h2>Attività</h2>
+                    <p>Crea un file <code>__init__.py</code> nella directory principale del modulo e importalo correttamente.</p>
+                    ]]>
+            </field>
+            <field name="description">Comprendere il ruolo del file Init.</field>
+            <field name="is_completed">False</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="tutorial_create_model" model="tutorial.model">
+            <field name="name">Creazione di un Modello</field>
+            <field name="content">
+                        <![CDATA[
+                <h1>Creazione di un Modello</h1>
+                <p>Un modello in Odoo rappresenta una tabella del database e viene definito in Python.</p>
+                <h2>Esempio:</h2>
+                <pre>
+                from odoo import models, fields
+
+                class Articolo(models.Model):
+                    _name = 'gestione.articolo'
+                    _description = 'Gestione degli articoli'
+
+                    name = fields.Char(string="Nome", required=True)
+                    prezzo = fields.Float(string="Prezzo")
+                    descrizione = fields.Text(string="Descrizione")
+                </pre>
+                <p>Salva il file nella directory <code>models</code> e assicurati di importarlo nel file <code>__init__.py</code>.</p>
+                <h2>Prossimo Passo:</h2>
+                <p>Dopo aver definito il modello, configureremo la vista per permettere agli utenti di interagire con i dati.</p>
+                ]]>
+            </field>
+            <field name="description">Impara a creare un modello e comprendere la sua struttura.</field>
+            <field name="is_completed">False</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="tutorial_create_views" model="tutorial.model">
+    <field name="name">Creazione delle Viste</field>
+    <field name="content">
+        <![CDATA[
+        <h1>Creazione delle Viste</h1>
+        <p>Le viste in Odoo definiscono come i dati vengono presentati agli utenti. Esistono diversi tipi di viste, come:</p>
+        <ul>
+            <li><b>Vista Tree:</b> Mostra un elenco di record.</li>
+            <li><b>Vista Form:</b> Permette di visualizzare e modificare un record specifico.</li>
+            <li><b>Vista Kanban:</b> Presenta i record come schede organizzate in colonne.</li>
+        </ul>
+        <h2>Creazione delle Viste Tree e Form</h2>
+        <pre>
+<odoo>
+    <record id="view_article_tree" model="ir.ui.view">
+        <field name="name">article.tree</field>
+        <field name="model">gestione.articolo</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="prezzo"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_article_form" model="ir.ui.view">
+        <field name="name">article.form</field>
+        <field name="model">gestione.articolo</field>
+        <field name="arch" type="xml">
+            <form string="Articolo">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="prezzo"/>
+                        <field name="descrizione"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+        </pre>
+        <h2>Prossimo Passo:</h2>
+        <p>Dopo aver creato le viste, aggiungeremo un menu e le azioni per accedere al modulo.</p>
+        ]]>
+    </field>
+    <field name="description">Impara a creare viste Tree e Form per il modello.</field>
+    <field name="is_completed">False</field>
+            <field name="sequence">5</field>
+</record>
+
+        <record id="tutorial_create_menu" model="tutorial.model">
+    <field name="name">Creazione del Menu</field>
+    <field name="content">
+        <![CDATA[
+        <h1>Creazione del Menu</h1>
+        <p>Per accedere al modulo dall'interfaccia utente di Odoo, dobbiamo creare un menu. Un menu è collegato a un'azione che apre una vista specifica.</p>
+        <h2>Definizione del Menu</h2>
+        <pre>
+<odoo>
+    <menuitem id="menu_gestione_articoli_root" name="Gestione Articoli" sequence="10"/>
+
+    <menuitem id="menu_gestione_articoli"
+              name="Articoli"
+              parent="menu_gestione_articoli_root"
+              action="action_gestione_articoli"
+              sequence="20"/>
+
+    <record id="action_gestione_articoli" model="ir.actions.act_window">
+        <field name="name">Gestione Articoli</field>
+        <field name="res_model">gestione.articolo</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
+        </pre>
+        <h2>Collegamenti</h2>
+        <p>
+            Assicurati che il menu e l'azione siano collegati al modello e alle viste create nei passaggi precedenti.
+        </p>
+        <h2>Prossimo Passo:</h2>
+        <p>Ora che abbiamo il menu, passeremo alla gestione della sicurezza e dei permessi di accesso.</p>
+        ]]>
+    </field>
+    <field name="description">Crea menu per accedere al modulo.</field>
+    <field name="is_completed">False</field>
+            <field name="sequence">6</field>
+</record>
+
+<record id="tutorial_security_access" model="tutorial.model">
+    <field name="name">Sicurezza e Accessi</field>
+    <field name="content">
+        <![CDATA[
+        <h1>Sicurezza e Accessi</h1>
+        <p>Odoo utilizza file CSV per definire i permessi di accesso ai modelli. Questi file specificano chi può leggere, scrivere, creare e cancellare i dati.</p>
+        <h2>Definizione dei Permessi</h2>
+        <p>Crea il file <code>ir.model.access.csv</code> nella directory <code>security</code> del modulo:</p>
+        <pre>
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gestione_articoli_user,gestione_articoli_user_access,model_gestione_articolo,,1,0,0,0
+access_gestione_articoli_manager,gestione_articoli_manager_access,model_gestione_articolo,base.group_system,1,1,1,1
+        </pre>
+        <h2>Caricamento del File</h2>
+        <p>Aggiungi il file <code>ir.model.access.csv</code> al manifest:</p>
+        <pre>
+'data': [
+    'security/ir.model.access.csv',
+    'views/article_views.xml',
+],
+        </pre>
+        <h2>Prossimo Passo:</h2>
+        <p>Ora che la sicurezza è impostata, procederemo a caricare dati iniziali per popolare il modulo.</p>
+        ]]>
+    </field>
+    <field name="description">Definisci permessi di accesso per il modulo.</field>
+    <field name="is_completed">False</field>
+    <field name="sequence">7</field>
+</record>
+
+        <record id="tutorial_demo_data" model="tutorial.model">
+    <field name="name">Caricamento Dati Demo</field>
+    <field name="content">
+        <![CDATA[
+        <h1>Caricamento Dati Demo</h1>
+        <p>I dati demo vengono utilizzati per testare il modulo con contenuti predefiniti. Questi file sono caricati durante l'installazione del modulo.</p>
+        <h2>Esempio di File XML</h2>
+        <pre>
+<odoo>
+    <record id="demo_articolo_1" model="gestione.articolo">
+        <field name="name">Articolo Demo 1</field>
+        <field name="prezzo">10.5</field>
+        <field name="descrizione">Questo è un articolo demo.</field>
+    </record>
+    <record id="demo_articolo_2" model="gestione.articolo">
+        <field name="name">Articolo Demo 2</field>
+        <field name="prezzo">20.0</field>
+        <field name="descrizione">Secondo articolo demo.</field>
+    </record>
+</odoo>
+        </pre>
+        <h2>Manifest</h2>
+        <p>Aggiungi il file demo al manifest:</p>
+        <pre>
+'demo': [
+    'data/article_demo.xml',
+],
+        </pre>
+        <h2>Prossimo Passo:</h2>
+        <p>Dopo aver caricato i dati demo, aggiungeremo automazioni per rendere il modulo più dinamico.</p>
+        ]]>
+    </field>
+    <field name="description">Impara a caricare dati di esempio per il modulo.</field>
+    <field name="is_completed">False</field>
+            <field name="sequence">8</field>
+</record>
+
+<record id="tutorial_automations" model="tutorial.model">
+    <field name="name">Automazioni e Logica di Business</field>
+    <field name="content">
+        <![CDATA[
+        <h1>Automazioni e Logica di Business</h1>
+        <p>In Odoo, possiamo aggiungere automazioni e logica personalizzata utilizzando metodi Python, decoratori e azioni server-side.</p>
+
+        <h2>Automazioni con Decoratori</h2>
+        <p>Un esempio comune è l'uso di <code>@api.depends</code> per calcolare automaticamente i valori di un campo:</p>
+        <pre>
+from odoo import models, fields, api
+
+class Articolo(models.Model):
+    _name = 'gestione.articolo'
+    _description = 'Gestione degli articoli'
+
+    name = fields.Char(string="Nome", required=True)
+    prezzo = fields.Float(string="Prezzo")
+    descrizione = fields.Text(string="Descrizione")
+    prezzo_iva = fields.Float(string="Prezzo con IVA", compute="_calcola_prezzo_iva", store=True)
+
+    @api.depends('prezzo')
+    def _calcola_prezzo_iva(self):
+        for record in self:
+            record.prezzo_iva = record.prezzo * 1.22
+        </pre>
+
+        <h2>Automazioni con Azioni Server</h2>
+        <p>Un'altra automazione è definire azioni server per eseguire codice specifico tramite interfaccia utente:</p>
+        <pre>
+<odoo>
+    <record id="server_action_example" model="ir.actions.server">
+        <field name="name">Aumenta Prezzo</field>
+        <field name="model_id" ref="model_gestione_articolo"/>
+        <field name="state">code</field>
+        <field name="code">
+for record in records:
+    record.prezzo += 10
+        </field>
+    </record>
+</odoo>
+        </pre>
+        <h2>Prossimo Passo:</h2>
+        <p>Concluderemo con il test del modulo e la documentazione per una migliore manutenibilità.</p>
+        ]]>
+    </field>
+    <field name="description">Impara ad aggiungere automazioni e logica di business al modulo.</field>
+    <field name="is_completed">False</field>
+    <field name="sequence">9</field>
+</record>
+
+     <record id="tutorial_testing" model="tutorial.model">
+    <field name="name">Testing e Conclusioni</field>
+    <field name="content">
+        <![CDATA[
+        <h1>Testing e Conclusioni</h1>
+        <p>Il test del modulo garantisce che tutte le funzionalità funzionino correttamente prima di essere rilasciate.</p>
+
+        <h2>Test Automatici</h2>
+        <p>Possiamo creare test utilizzando il framework di test di Odoo. Questi test si trovano nella directory <code>tests</code>:</p>
+        <pre>
+from odoo.tests.common import TransactionCase
+
+class TestArticolo(TransactionCase):
+    def test_creazione_articolo(self):
+        articolo = self.env['gestione.articolo'].create({
+            'name': 'Articolo Test',
+            'prezzo': 15.0,
+        })
+        self.assertEqual(articolo.name, 'Articolo Test')
+        self.assertEqual(articolo.prezzo, 15.0)
+        </pre>
+
+        <h2>Checklist Finale</h2>
+        <p>Prima di completare lo sviluppo, verifica:</p>
+        <ul>
+            <li>I permessi di accesso sono corretti.</li>
+            <li>Tutte le viste funzionano come previsto.</li>
+            <li>Le automazioni e le logiche personalizzate sono ben testate.</li>
+            <li>I dati demo sono caricati correttamente.</li>
+            <li>Il modulo è ben documentato.</li>
+        </ul>
+
+        <h2>Conclusione</h2>
+        <p>Hai completato il corso sulla creazione di un modulo in Odoo. Ora sei pronto per creare moduli complessi e personalizzati!</p>
+        ]]>
+    </field>
+    <field name="description">Concludi il corso con il testing e la verifica del modulo.</field>
+    <field name="is_completed">False</field>
+         <field name="sequence">10</field>
+</record>
+
+
+    </data>
+</odoo>
