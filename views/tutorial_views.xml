@@ -11,7 +11,7 @@
             <field name="name">Tutorial</field>
             <field name="res_model">tutorial.model</field>
             <field name="view_mode">tree,form</field>
-            <field name="view_id" ref="view_tutorial_tree"/>
+
         </record>
 
         <!-- Vista Tree -->
