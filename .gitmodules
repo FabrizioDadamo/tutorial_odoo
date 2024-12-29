@@ -1,4 +1,4 @@
 [submodule "custom/addons/tutorial_odoo"]
 	path = custom/addons/tutorial_odoo
 	url = https://github.com/FabrizioDadamo/tutorial_odoo.git
-	branch = main
+	branch = 16.0
